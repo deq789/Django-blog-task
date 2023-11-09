@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Article List</title>
+</head>
+<body>
+    <h1>Article List</h1>
+    <ul>
+        {% for article in articles %}
+            <li>
+                <strong>{{ article.title }}</strong><br>
+                {{ article.content }}
+            </li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
