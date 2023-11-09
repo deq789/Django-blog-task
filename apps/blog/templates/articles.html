@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
-{%block content%}
+{% block content %}
 
 <h1>Articles</h1>
 <ul>
     {% for article in articles %}
-    <li>
-        <strong><a
-                href="{% url 'apps.blog:article_detail' slug=article.slug pk=article.pk %}">{{article.title}}</a></strong>
-        {{ article.publication_datetime }}
+    <li class="article-item">
+        <h3><a
+            href="{% url 'apps.blog:article_detail' slug=article.slug pk=article.pk %}">{{article.title}}</a></h3>
+        <p>Published on: <span class="date">{{ article.publication_datetime }} </span></p>
     </li>
     {% endfor %}
 </ul>

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{%block content%}
+{% block content %}
 
     <form method="post" action="{% url 'apps.contact:contact_view' %}">
         {% csrf_token %}
@@ -8,4 +8,4 @@
         <button type="submit">Send</button>
     </form>
 
-{%endblock%}
+{% endblock %}

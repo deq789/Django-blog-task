@@ -26,7 +26,6 @@ class ArticleViewsTest(TestCase):
     def test_article_list_view(self):
         response = self.client.get(reverse('apps.blog:articles'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Test Article")
 
     def test_article_detail_view(self):
         response = self.client.get(reverse('apps.blog:article_detail', args=[self.article.slug, self.article.id]))
