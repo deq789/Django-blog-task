@@ -1,0 +1,34 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <title>Your Home Page</title>
+</head>
+<body>
+
+<header class="header">
+    <h1>Django task for MIR MEDIA</h1>
+    <nav class="header-navbar">
+        <ul>
+            <li><a href="{% url 'apps.home:home_view' %}">Home</a></li>
+            <li><a href="{% url 'apps.blog:articles' %}">Articles</a></li>
+            <li><a href="{% url 'apps.contact:contact_view' %}">Contact</a></li>
+            <li><a href="{% url 'admin:index' %}" target="_blank">Admin</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="content">
+
+    {% block content %}
+    
+    {% endblock %}
+
+</div>
+
+</body>
+</html>
