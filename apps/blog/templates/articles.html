@@ -8,8 +8,8 @@
     <ul>
         {% for article in articles %}
             <li>
-                <strong>{{ article.title }}</strong><br>
-                {{ article.content }}
+                <strong><a href="{% url 'apps.blog:article_detail' slug=article.slug pk=article.pk %}">{{ article.title }}</a></strong>
+                {{ article.publication_datetime }}
             </li>
         {% endfor %}
     </ul>

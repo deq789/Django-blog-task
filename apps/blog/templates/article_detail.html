@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ article.title }}</title>
+</head>
+<body>
+    <h1>{{ article.title }}</h1>
+    <p>{{ article.content }}</p>
+
+    <p>Author: {{ article.author }}</p>
+    <p>Publication Date: {{ article.publication_datetime }}</p>
+
+    <a href="{% url 'apps.blog:articles' %}">Back to Article List</a>
+</body>
+</html>
