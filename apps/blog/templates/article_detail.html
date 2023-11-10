@@ -1,15 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h1 class="card-title">{{ article.title }}</h1>
 
-    <div>
-        <h1>{{ article.title }}</h1>
-        <p>{{ article.content }}</p>
+                    <p class="card-text">{{ article.content }}</p>
 
-        <p>Author: {{ article.author }}</p>
-        <p>Publication Date: {{ article.publication_datetime }}</p>
+                    <p class="card-text">
+                        <small class="text-muted">Author: {{ article.author }}</small>
+                    </p>
+                    <p class="card-text">
+                        <small class="text-muted">Publication Date: {{ article.publication_datetime }}</small>
+                    </p>
 
-        <a href="{% url 'apps.blog:articles' %}">Back to Article List</a>
+                    <a href="{% url 'apps.blog:articles' %}" class="btn btn-primary">Back to Article List</a>
+                </div>
+            </div>
+        </div>
     </div>
-
-{%endblock%}
+{% endblock %}
