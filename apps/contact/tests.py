@@ -1,6 +1,5 @@
 from django.test import TestCase, Client
 from django.urls import reverse
-from django.core import mail
 
 from apps.contact.models import ContactRequest
 
@@ -22,6 +21,17 @@ class ContactFormTest(TestCase):
 
         # Check that the form submission was successful
         self.assertEqual(response.status_code, 200)
+        # Check that object was saved
+        self.assertEqual(ContactRequest.objects.count(), 1)
+
+    def test_contact_form_data_creation(self):
+        form_data = {
+            'name': 'John Doe',
+            'email': 'john@example.com',
+            'content': 'Test message content.'
+        }
+
+        self.client.post(reverse('apps.contact:contact_view'), form_data, follow=True)
 
         # Check that a new entry was created in the database
         self.assertEqual(ContactRequest.objects.count(), 1)
