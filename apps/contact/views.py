@@ -1,41 +1,32 @@
 from django.core.mail import EmailMessage
 from django.conf import settings
-from django.shortcuts import render
-from django.views import View
+from django.views.generic.edit import FormView
 
 from decouple import config
 
 from .forms import ContactForm
 
 
-class ContactView(View):
+class ContactView(FormView):
     template_name = 'contact_form.html'
-    success_template_name = 'success.html'
+    form_class = ContactForm
+    success_url = '/success/'
 
-    def get(self, request, *args, **kwargs):
-        form = ContactForm()
-        return render(request, self.template_name, {'form': form})
+    def form_valid(self, form):
+        # Send a confirmation email with contact form data
+        subject = 'Django blog task'
+        message = f'Name: {form.cleaned_data["name"]}\nContent: {form.cleaned_data["content"]}'
+        from_email = settings.DEFAULT_FROM_EMAIL
+        recipient_list = [config('RECIPIENT')]
 
-    def post(self, request, *args, **kwargs):
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            form.save()
+        msg = EmailMessage(
+            subject,
+            message,
+            from_email,
+            recipient_list,
+            reply_to=[form.cleaned_data["email"]],
+        )
 
-            # Send an email
-            subject = 'Django blog task'
-            message = f'Name: {form.cleaned_data["name"]}\nContent: {form.cleaned_data["content"]}'
-            from_email = settings.DEFAULT_FROM_EMAIL
-            recipient_list = [config('RECIPIENT')]
+        msg.send()
 
-            msg = EmailMessage(
-                subject,
-                message,
-                from_email,
-                recipient_list,
-                reply_to=[form.cleaned_data["email"]],
-            )
-
-            msg.send()
-            return render(request, self.success_template_name)  # Render success template
-
-        return render(request, self.template_name, {'form': form})
+        return super().form_valid(form)
