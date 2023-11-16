@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
 from django.core.mail import EmailMessage
 from django.conf import settings
+from django.shortcuts import render
 from django.views import View
+
 from decouple import config
 
 from .forms import ContactForm
